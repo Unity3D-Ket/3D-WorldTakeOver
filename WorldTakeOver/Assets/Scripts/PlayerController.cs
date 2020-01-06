@@ -4,30 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     float horizontalThrow, verticalThrow;
+    bool controlEnabled = true;
 
+    [Header("General")]
     [SerializeField] float speed = 95f;
+    [Header("Screen Position")]
     [SerializeField] float horizontalRangeView = 70f;
     [SerializeField] float verticalRangeView = 40f;
-
+    [Header("Controll Input")]
     [SerializeField] float PitchFactor = -40f;
     [SerializeField] float RollFactor = -50f;
     [SerializeField] float yawFactor = .4f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        playerMovement();
-        playerRotation();
+        if (controlEnabled)
+        {
+            playerMovement();
+            playerRotation();
+        }
+    }
+
+    void OnPlayerDeath() //Called by string Reference
+    {
+        print("Player Died");
+        controlEnabled = false;
     }
 
     public void playerMovement()
