@@ -17,7 +17,6 @@ public class PlayerCollisionHandler : MonoBehaviour
 
 	private void startDeathSequence()
     {
-        print("Player has Triggered with an Object");
 		SendMessage("OnPlayerDeath");
 	}
 
