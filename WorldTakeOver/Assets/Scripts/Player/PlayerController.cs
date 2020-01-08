@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("General")]
     [SerializeField] float speed = 95f;
+    [SerializeField] GameObject[] guns;
     [Header("Screen Position")]
     [SerializeField] float horizontalRangeView = 70f;
     [SerializeField] float verticalRangeView = 40f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             playerMovement();
             playerRotation();
+            processFiring();
         }
     }
 
@@ -63,4 +65,30 @@ public class PlayerController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 
+    public void processFiring()
+    {
+        if (CrossPlatformInputManager.GetButton("Fire"))
+        {
+            activateGuns();
+        }
+        else {
+            deactivcateGuns();
+        }
+    }
+
+    private void activateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(true);
+        }
+    }
+
+    private void deactivcateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(false);
+        }
+    }
 }
